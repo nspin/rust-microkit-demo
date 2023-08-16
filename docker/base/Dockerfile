@@ -53,17 +53,7 @@ RUN set -eux; \
 
 ENV SEL4CP_SDK=/opt/sel4cp/sel4cp-sdk-$SEL4CP_SDK_VERSION
 
-ARG UID
-ARG GID
-
-RUN groupadd -f -g $GID x && useradd -u $UID -g $GID -G sudo -m -p x x
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers # for convenience
-
-USER x
-
 RUN curl -sSf https://sh.rustup.rs | \
         bash -s -- -y --no-modify-path --default-toolchain none
-
-ENV PATH=/home/x/.cargo/bin:$PATH
 
 WORKDIR /work

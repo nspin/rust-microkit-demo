@@ -4,18 +4,15 @@ id := rust-sel4-sel4cp-demo
 image_tag := $(id)
 container_name := $(id)
 
-uid := $(shell id -u)
-gid := $(shell id -g)
-
 .PHONY: none
 none:
 
 .PHONY: build
 build:
 	docker build \
-		--build-arg UID=$(uid) --build-arg GID=$(gid) \
 		-t $(image_tag) .
 
+# These targets might not even be needed
 .PHONY: run
 run: build
 	docker run -d --name $(container_name) \
